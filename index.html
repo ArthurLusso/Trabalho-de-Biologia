@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Biológica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <main class="app">
+
+        <!-- TELA INICIAL -->
+        <section id="setupScreen" class="screen setup-screen">
+
+            <header class="topbar">
+                <div class="brand">
+                    <div class="brand-icon">🧬</div>
+                    <div>
+                        <h3>ARENA BIOLÓGICA</h3>
+                        <p>DESAFIO DE PARASITOLOGIA</p>
+                    </div>
+                </div>
+
+                <button class="sound-button" id="soundToggle">
+                    🔊 Som ligado
+                </button>
+            </header>
+
+            <div class="hero">
+
+                <div class="hero-badge">
+                    <span class="live-dot"></span>
+                    DESAFIO DE BIOLOGIA
+                </div>
+
+                <h1>
+                    CONHECIMENTO<br>
+                    EM <span class="gradient-text">BATALHA.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Teste seus conhecimentos sobre Teníase,
+                    Cisticercose e Ancilostomose.
+                    Prepare sua equipe e entre na disputa!
+                </p>
+
+            </div>
+
+            <div class="setup-card">
+
+                <div class="card-heading">
+                    <div>
+                        <span class="section-label">CONFIGURAÇÃO</span>
+                        <h2>Monte sua batalha</h2>
+                    </div>
+
+                    <span class="trophy-icon">🏆</span>
+                </div>
+
+                <form id="setupForm">
+
+                    <div class="team-inputs">
+
+                        <div class="input-group">
+                            <label for="team1Input">
+                                <span class="team-dot blue-dot"></span>
+                                EQUIPE 01
+                            </label>
+
+                            <input
+                                type="text"
+                                id="team1Input"
+                                placeholder="Nome da equipe 1"
+                                maxlength="20"
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="team2Input">
+                                <span class="team-dot purple-dot"></span>
+                                EQUIPE 02
+                            </label>
+
+                            <input
+                                type="text"
+                                id="team2Input"
+                                placeholder="Nome da equipe 2"
+                                maxlength="20"
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="game-info">
+
+                        <div class="info-item">
+                            <span>⏱️</span>
+                            <div>
+                                <strong>45 segundos</strong>
+                                <small>Por pergunta</small>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <span>🎯</span>
+                            <div>
+                                <strong>10 pontos</strong>
+                                <small>Por acerto</small>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <span>🃏</span>
+                            <div>
+                                <strong>3 cartas</strong>
+                                <small>Especiais</small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="start-button">
+                        COMEÇAR BATALHA
+                        <span>➜</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="disease-tags">
+                <span>🪱 TENÍASE</span>
+                <span>🧠 CISTICERCOSE</span>
+                <span>🦠 ANCILOSTOMOSE</span>
+            </div>
+
+            <footer class="footer">
+                ARENA BIOLÓGICA • DESAFIO ENTRE EQUIPES
+            </footer>
+
+        </section>
+
+
+        <!-- TELA DO JOGO -->
+        <section id="gameScreen" class="screen game-screen hidden">
+
+            <header class="game-header">
+
+                <div class="brand">
+                    <div class="brand-icon">🧬</div>
+                    <div>
+                        <h3>ARENA BIOLÓGICA</h3>
+                        <p>DESAFIO DE PARASITOLOGIA</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <span class="question-counter" id="questionCounter">
+                        QUESTÃO 01/24
+                    </span>
+
+                    <button class="sound-button" id="gameSoundToggle">
+                        🔊
+                    </button>
+                </div>
+
+            </header>
+
+
+            <!-- PLACAR -->
+            <section class="scoreboard">
+
+                <div class="team-card team-blue active-team" id="teamCard0">
+
+                    <div class="team-card-header">
+                        <span class="team-indicator blue-dot"></span>
+                        <span id="teamName0">EQUIPE 01</span>
+                        <span class="turn-label" id="turnLabel0">SUA VEZ</span>
+                    </div>
+
+                    <div class="team-points">
+                        <strong id="score0">0</strong>
+                        <span>PONTOS</span>
+                    </div>
+
+                </div>
+
+
+                <div class="versus">
+                    <span>VS</span>
+                </div>
+
+
+                <div class="team-card team-purple" id="teamCard1">
+
+                    <div class="team-card-header">
+                        <span class="team-indicator purple-dot"></span>
+                        <span id="teamName1">EQUIPE 02</span>
+                        <span class="turn-label" id="turnLabel1">AGUARDANDO</span>
+                    </div>
+
+                    <div class="team-points">
+                        <strong id="score1">0</strong>
+                        <span>PONTOS</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ÁREA PRINCIPAL -->
+            <section class="battle-area">
+
+                <div class="battle-top">
+
+                    <div class="turn-indicator" id="turnText">
+                        VEZ DA EQUIPE 01
+                    </div>
+
+                    <div class="timer-area">
+
+                        <div class="timer-label">
+                            <span>⏱️ TEMPO RESTANTE</span>
+                            <strong id="timer">45</strong>
+                        </div>
+
+                        <div class="timer-track">
+                            <div id="timerBar" class="timer-bar"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERGUNTA -->
+                <div class="question-card">
+
+                    <div class="question-meta">
+                        <span class="question-category" id="questionCategory">
+                            TENÍASE
+                        </span>
+
+                        <span class="question-type">
+                            ESCOLHA A ALTERNATIVA CORRETA
+                        </span>
+                    </div>
+
+                    <h2 id="questionText">
+                        Carregando pergunta...
+                    </h2>
+
+                    <div class="options-grid" id="optionsContainer">
+                    </div>
+
+
+                    <!-- FEEDBACK -->
+                    <div id="feedback" class="feedback hidden">
+
+                        <h3 id="feedbackTitle"></h3>
+
+                        <p id="feedbackText"></p>
+
+                    </div>
+
+
+                    <!-- DICA -->
+                    <div id="hintBox" class="hint-box hidden">
+                        <span>💡 DICA:</span>
+                        <p id="hintText"></p>
+                    </div>
+
+                </div>
+
+
+                <!-- CARTAS -->
+                <div class="cards-section">
+
+                    <div class="cards-heading">
+                        <div>
+                            <span class="section-label">RECURSOS ESPECIAIS</span>
+                            <h3>Suas cartas</h3>
+                        </div>
+
+                        <span class="cards-subtitle">
+                            Uma utilização por carta
+                        </span>
+                    </div>
+
+
+                    <div class="cards-grid">
+
+                        <button class="special-card fifty-card" data-card="fifty">
+
+                            <span class="special-card-icon">✂️</span>
+
+                            <span class="special-card-name">50/50</span>
+
+                            <small>Elimina 2 alternativas</small>
+
+                            <span class="card-status">DISPONÍVEL</span>
+
+                        </button>
+
+
+                        <button class="special-card hint-card" data-card="hint">
+
+                            <span class="special-card-icon">💡</span>
+
+                            <span class="special-card-name">DICA</span>
+
+                            <small>Receba uma pista</small>
+
+                            <span class="card-status">DISPONÍVEL</span>
+
+                        </button>
+
+
+                        <button class="special-card time-card" data-card="time">
+
+                            <span class="special-card-icon">⏱️</span>
+
+                            <span class="special-card-name">+20 SEG</span>
+
+                            <small>Ganhe mais tempo</small>
+
+                            <span class="card-status">DISPONÍVEL</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer class="game-footer">
+                <button id="exitButton" class="exit-button">
+                    ← SAIR DA PARTIDA
+                </button>
+
+                <span>ARENA BIOLÓGICA • BOA SORTE!</span>
+            </footer>
+
+        </section>
+
+
+        <!-- TELA FINAL -->
+        <section id="resultScreen" class="screen result-screen hidden">
+
+            <div class="result-content">
+
+                <div class="result-trophy">🏆</div>
+
+                <span class="section-label">FIM DE JOGO</span>
+
+                <h1 id="resultTitle">
+                    TEMOS UM VENCEDOR!
+                </h1>
+
+                <p id="winnerName" class="winner-name"></p>
+
+                <div class="final-scoreboard" id="finalScores"></div>
+
+                <p class="result-message">
+                    Parabéns às duas equipes por participarem
+                    do desafio de conhecimentos biológicos!
+                </p>
+
+                <button id="restartButton" class="start-button">
+                    JOGAR NOVAMENTE
+                    <span>↻</span>
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
